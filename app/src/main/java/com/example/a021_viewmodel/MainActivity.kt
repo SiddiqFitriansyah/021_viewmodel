@@ -71,7 +71,7 @@ class MainActivity : ComponentActivity() {
 
 
 @Composable
-fun Register(){
+fun HomePage(){
     Column( modifier = Modifier
         .fillMaxSize()
         .padding(20.dp),
@@ -189,18 +189,49 @@ fun SelectJK(
                     }
                 ),
                 verticalAlignment = Alignment.CenterVertically
-            ){
-                RadioButton(selected= selectedValue == item,
-                    onClick ={
+            ) {
+                RadioButton(selected = selectedValue == item,
+                    onClick = {
                         selectedValue = item
                         onSelectionChanged(item)
                     }
                 )
-                Text(item)
+                Text(text = "Pria")
             }
         }
     }
 }
+
+@Composable
+fun SelectStatus(
+    options: List<String>,
+    onSelectionChanged: (String) -> Unit = {}
+) {
+    var selectedValue by rememberSaveable { mutableStateOf("") }
+
+    Column (modifier = Modifier.padding(16.dp)){
+        options.forEach{item ->
+            Row(
+                modifier= Modifier.selectable(
+                    selected= selectedValue == item,
+                    onClick = {selectedValue = item
+                        onSelectionChanged(item)
+                    }
+                ),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                RadioButton(selected = selectedValue == item,
+                    onClick = {
+                        selectedValue = item
+                        onSelectionChanged(item)
+                    }
+                )
+                Text(text = "Menikah")
+            }
+        }
+    }
+}
+
 
 @Composable
 fun TextHasil(namanya: String, teleponnya: String, emailnya:String, alamatnya:String, jenisnya: String){
